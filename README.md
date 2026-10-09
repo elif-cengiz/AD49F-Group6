@@ -1,68 +1,69 @@
 # AD49F — Group 6: Unsupervised ML1 Applications
 
-**"20 hisse, kaç bahis?"** — BIST'te PCA ve kümeleme ile gizli risk faktörleri
+**"20 stocks, how many bets?"** — Hidden risk factors in BIST equities with PCA and clustering
 
-AD 49F: Data and Decisions — Building Your Own Investing Algorithms with AI · Boğaziçi Üniversitesi
+AD 49F: Data and Decisions — Building Your Own Investing Algorithms with AI · Boğaziçi University
 
-## Ekip
+## Team
 
-| Üye | Sahnede | Sorumluluk | Kod |
+| Member | On stage | Responsibility | Code |
 | --- | --- | --- | --- |
-| Elif Sude Cengiz (A) | Açılış, Perde 1: PCA, soru-cevap moderatörü | Hikâye + PCA uzmanı; demo programı | `src/config.py`, `src/pca.py`, `grup6_demo.py`, `tests/helpers.py` |
-| Üye B (isim) | Perde 2: Kümeleme, Kapanış | Kümeleme + canlı Claude Code demosu; slaytlar | `src/plotting.py`, `src/clustering.py`, `tests/run_all.py` |
-| Üye C (isim) | Veri bölümü, Perde 3: Dürüst test | Veri hattı, dürüst test, dürüstlük sözleşmesi | `src/data.py`, `src/backtest.py`, `docs/decisions.md` |
+| Elif Sude Cengiz (A) | Opening, Act 1: PCA, Q&A moderator | Story + PCA lead; demo script | `src/config.py`, `src/pca.py`, `grup6_demo.py`, `tests/helpers.py` |
+| Member B (name) | Act 2: Clustering, Closing | Clustering + live Claude Code demo; slides | `src/plotting.py`, `src/clustering.py`, `tests/run_all.py` |
+| Member C (name) | Data section, Act 3: Honest test | Data pipeline, honest backtest, honesty contract | `src/data.py`, `src/backtest.py`, `docs/decisions.md` |
 
-Ekip: Elif Sude Cengiz, Esat Çankaya, Ahmet Çevik.
+Team: Elif Sude Cengiz, Esat Çankaya, Ahmet Çevik.
 
-## Hipotez
+## Hypothesis
 
-20 likit BIST hissesi tutan bir yatırımcı 20 bağımsız bahis yaptığını sanır. PCA ve kümeleme, gerçek bağımsız
-risk kaynağı sayısının çok daha az olduğunu ve stres dönemlerinde daha da azaldığını gösterir. Bu bilgiyle kurulan
-küme-dengeli portföyü eşit ağırlıklı portföye karşı, sızıntısız bir walk-forward testle karşılaştırıyoruz.
+An investor holding 20 liquid BIST stocks believes they are making 20 independent bets. PCA and clustering show
+that the real number of independent risk sources is much smaller, and that it shrinks further in stress periods.
+We turn this into a portfolio decision: a cluster-balanced portfolio versus an equal-weight portfolio, compared
+in a leakage-free walk-forward backtest.
 
-## Kurulum
+## Setup
 
 ```bash
 python -m venv .venv
-source .venv/bin/activate          # Windows: .venv\Scripts\activate
+source .venv/bin/activate          # Windows (Git Bash): source .venv/Scripts/activate
 pip install -r requirements.txt
 ```
 
-## Çalıştırma
+## Running
 
 ```bash
-python grup6_demo.py --act 0       # veri ve temizlik kontrolleri
+python grup6_demo.py --act 0       # data and cleaning checks
 python grup6_demo.py --act 1       # PCA
-python grup6_demo.py --act 2       # kümeleme
+python grup6_demo.py --act 2       # clustering
 python grup6_demo.py --act 3       # walk-forward backtest + absorption ratio
-python grup6_demo.py --act all --synthetic    # internetsiz prova
-python tests/run_all.py            # veya: pytest tests/
+python grup6_demo.py --act all --synthetic    # offline rehearsal with synthetic data
+python tests/run_all.py            # or: pytest tests/
 ```
 
-İlk çalıştırma veriyi `data/` klasörüne kaydeder; sonraki çalıştırmalar internetsiz çalışır.
-Grafikler `figs/` klasörüne yazılır.
+The first run saves the data to `data/`; later runs work offline.
+Charts are written to `figs/`.
 
-## Proje yapısı
+## Project structure
 
 ```text
-grup6_demo.py        sunumda çalıştırılan giriş noktası
-src/config.py        tarihler, hisseler, sabitlenmiş parametreler (dürüstlük sözleşmesi)
-src/data.py          indirme, önbellek, temizlik (tatil günleri, ±%10 kontrolü)
-src/pca.py           PCA, Marchenko–Pastur gürültü sınırı, efektif bahis sayısı
-src/clustering.py    korelasyon mesafesi, hiyerarşik kümeleme, k seçimi, kararlılık
-src/backtest.py      walk-forward backtest, katkı analizi, absorption ratio
-src/plotting.py      ortak grafik stili
-tests/               23 sanity testi
-docs/                kararlar, sonuçlar, yapay zeka kullanım logu
+grup6_demo.py        entry point run during the presentation
+src/config.py        dates, tickers, fixed parameters (honesty contract)
+src/data.py          download, cache, cleaning (holiday rows, ±10% check)
+src/pca.py           PCA, Marchenko–Pastur noise threshold, effective number of bets
+src/clustering.py    correlation distance, hierarchical clustering, choice of k, stability
+src/backtest.py      walk-forward backtest, attribution, absorption ratio
+src/plotting.py      shared chart style
+tests/               23 sanity tests
+docs/                decisions, results, AI usage log
 ```
 
-## Dürüstlük sözleşmesi
+## Honesty contract
 
-Parametreler sonuçlar görülmeden `src/config.py` ve `docs/decisions.md` içinde sabitlenmiştir:
-eğitim/test kesimi 2025-06-30, 250 günlük geçmiş pencere, aylık yeniden dengeleme, 10 bp/yön işlem maliyeti,
-k yalnızca eğitim verisiyle seçilir.
+Parameters were fixed in `src/config.py` and `docs/decisions.md` before looking at results:
+train/test split on 2025-06-30, 250-day look-back window, monthly rebalancing, 10 bp one-way transaction cost,
+and k chosen on training data only.
 
-## Yapay zeka kullanımı
+## Use of AI
 
-Kodun bir kısmı Claude ile yazıldı; her parçası `tests/` altındaki testlerle doğrulandı.
-Prompt'lar, çıktılar ve yakalanan hatalar `docs/ai_log.md` dosyasındadır.
+Part of the code was written with Claude; every piece is checked by the tests in `tests/`.
+Prompts, outputs and the bugs we caught are logged in `docs/ai_log.md`.

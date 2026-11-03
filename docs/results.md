@@ -1,6 +1,6 @@
 # Results (real data)
 
-Data download date: ____  ·  Commit: ____  ·  This file is frozen after `git tag v1-results`.
+Data download date: 2026-11-01  ·  Commit: tag v1-results  ·  This file is frozen after `git tag v1-results`.
 
 ## Act 0 — Data (Member C)
 - Number of stocks / trading days: 20 / 686

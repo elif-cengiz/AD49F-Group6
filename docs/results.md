@@ -29,7 +29,7 @@ Cluster 8: ASELS (Defense)
 ## Act 3 — Test (Member C)
 - Metrics table (TRY and USD): TRY: equal weight 18.3% return, 25.2% vol, 0.79 return/vol, -13.8% max drawdown; cluster-balanced 40.8%, 24.1%, 1.54, -13.1%. USD (approx.): equal weight 0.4%, 25.3%, 0.14, -22.1%; cluster-balanced 19.5%, 24.2%, 0.86, -18.6% (test 2025-07-01 to 2026-10-01, k=8, 10 bp one-way cost)
 - Leakage demo (honest vs. leaky return/vol): 1.54 vs 1.46
-- Period(s) with the highest absorption ratio: ____
+- Period(s) with the highest absorption ratio: mid to late June 2026 (about 15-25 June), ratio about 0.77, 120-day window
 
 ## Opening poll
 - The class's guess: ____ · Actual effective number of bets: ____

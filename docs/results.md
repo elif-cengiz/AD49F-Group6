@@ -3,9 +3,9 @@
 Data download date: ____  ·  Commit: ____  ·  This file is frozen after `git tag v1-results`.
 
 ## Act 0 — Data (Member C)
-- Number of stocks / trading days: ____ / ____
-- Train / test days: ____ / ____
-- Days beyond ±10% in unadjusted prices, and the most striking example: ____
+- Number of stocks / trading days: 20 / 686
+- Train / test days: 369 / 317
+- Days beyond ±10% in unadjusted prices, and the most striking example: 0 (none found, so no striking example)
 
 ## Act 1 — PCA (Member A)
 - PC1 variance share: 49.3% · First 3 PCs: 62.7%
@@ -27,9 +27,9 @@ Cluster 8: ASELS (Defense)
 - Train–test ARI (stability): 0.31  · ARI with sectors: 0.47 . The relatively low stability score indicates that cluster assignments change across the training and test periods. The sector agreement score suggests moderate alignment with traditional sector classifications.
 - Surprising stock(s): ASELS, ENKAI, and TOASO each form a single-stock cluster. This is important because these stocks receive relatively large weights in the cluster-balanced portfolio, potentially creating concentration risk. Some clusters also contain stocks from different sectors, showing that return-based clustering does not necessarily follow traditional sector classifications.
 ## Act 3 — Test (Member C)
-- Metrics table (TRY and USD): ____
-- Leakage demo (honest vs. leaky return/vol): ____
-- Period(s) with the highest absorption ratio: ____
+- Metrics table (TRY and USD): TRY: equal weight 18.3% return, 25.2% vol, 0.79 return/vol, -13.8% max drawdown; cluster-balanced 40.8%, 24.1%, 1.54, -13.1%. USD (approx.): equal weight 0.4%, 25.3%, 0.14, -22.1%; cluster-balanced 19.5%, 24.2%, 0.86, -18.6% (test 2025-07-01 to 2026-10-01, k=8, 10 bp one-way cost)
+- Leakage demo (honest vs. leaky return/vol): 1.54 vs 1.46
+- Period(s) with the highest absorption ratio: mid to late June 2026 (about 15-25 June), ratio about 0.77, 120-day window
 
 ## Opening poll
 - The class's guess: ____ · Actual effective number of bets: ____
